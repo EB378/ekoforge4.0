@@ -1,0 +1,101 @@
+.contactcontainer{
+    width: 100vw;
+    background-image: url('/backgroundmain-2.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+    display: inline;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    font-size: 3vh;
+}
+
+
+
+.contactleft {
+    float: left;
+    margin-left: 10vw;
+    width: 35vw;
+}
+
+
+.contactleft input[type=text] {
+    width: 45%;
+    padding: 12px 20px;
+    margin: 8px 2.5%;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+  }
+
+.contactleft input[type=email] {
+    width: 45%;
+    padding: 12px 20px;
+    margin: 8px 2.5%;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+  }
+
+.contactleft input[type=phone] {
+    width: 45%;
+    padding: 12px 20px;
+    margin: 8px 2.5%;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+  }
+
+.contactleft input[type=textbox] {
+    width: 95%;
+    padding: 12px 20px;
+    margin: 8px 0%;
+    box-sizing: border-box;
+    background-color: white;
+    color: black;
+    resize: none;
+  }
+
+.contactleft button[type=submit] {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    text-emphasis: bold;
+  }
+
+
+.contactleft input:focus {
+  border: 3px solid #000000;
+}
+
+
+
+.contactright {
+    vertical-align: middle;
+    padding: 30px;
+    border-color: white;
+    margin-top: 7vh;
+    font-size: x-large;
+    line-height: 5vh;
+    float: right;
+    margin-right: 10vw;
+    width: 35vw;
+}
+
+.contactright1 {
+  background-color: rgba(0, 0, 0, 0.545);
+  border: solid;
+  min-height: 20vh;
+}
+
+.contactinfo {
+  font-size: x-large;
+  padding-left: 0%;
+  margin-left: 0%;
+  margin-top: 5vh;
+}

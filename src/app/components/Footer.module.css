@@ -1,0 +1,14 @@
+.footcontainer {
+    width: 100vw;
+    min-height: 10vh;
+    background-color: rgb(6, 0, 34);
+    padding-left: 10%;
+    padding-top: 1.5vh;
+    padding-right: 10%;
+    display: flex;
+}
+
+.contact{
+    margin-left: 5%;
+    margin-right: 5%;
+}
