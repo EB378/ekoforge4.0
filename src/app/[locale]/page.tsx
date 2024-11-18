@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import styles1 from "./agitate.module.css";
 import Link from "next/link";
-import Contact from "./components/contact";
+import Contact from "../components/contact";
 import Image from "next/image";
 
 export default function Home() {
