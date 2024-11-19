@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <div>hi</div>
         <div className={styles.parallaxcontainer}>
 
 {/* Hook! */}
