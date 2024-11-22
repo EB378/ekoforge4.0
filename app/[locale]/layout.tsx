@@ -1,31 +1,25 @@
-import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
 import "../globals.css";
-import Nav from '../components/nav';
-import Footer from "../components/footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-
-export const metadata: Metadata = {
-  title: "EkoForge",
-  description: "Digital Marketing and Media Manegment",
-};
+import Footer from "@/components/Footer";
 
 export default async function RootLayout({
   children,
-  params: {locale}
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode;
-  params: {locale: string}
+  params: { locale: string };
 }>) {
   const messages = await getMessages();
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <div>
-            <Nav/>
+        <NextIntlClientProvider messages={messages}>
+          <div className="w-full sm:max-w-4xl mx-0 h-screen">
+            <Navbar locale={locale} />
             {children}
-            <Footer/>
+            <Footer locale={locale} />
           </div>
         </NextIntlClientProvider>
       </body>
