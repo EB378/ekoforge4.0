@@ -6,10 +6,11 @@ import Image from "next/image";
 import Contact from "@/components/Contact";
 
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>
 }) {
+  const { locale } = await params;
   const messages: any = await getMessages({ locale });
   const title = messages.NavbarLinks.homeTitle;
 
