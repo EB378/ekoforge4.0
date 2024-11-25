@@ -37,6 +37,7 @@ const Contact = ({ locale }: { locale: string }) => {
           </h1>
           <form name="contact" className="space-y-4" data-netlify="true" onSubmit={handleSubmit}>
 
+            <input type="hidden" name="form-name" value="contact" />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
