@@ -1,15 +1,33 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { FormEvent } from "react";
 
 const Contact = ({ locale }: { locale: string }) => {
   const t = useTranslations("Contact");
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
+      });
+      alert("Thank you for your submission");
+    } catch (error) {
+      alert("Submission failed. Please try again.");
+    }
+  };
+
   return (
     <div
       id="contactsec"
-      className=" bg-[url('/backgroundmain-2.png')] bg-cover mt-5 bg-fixed bg-center py-16 px-8 w-full overflow-hidden flex text-white"
+      className="bg-[url('/backgroundmain-2.png')] bg-cover mt-5 bg-fixed bg-center py-16 px-8 w-full overflow-hidden flex text-white"
     >
       <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Contact Form */}
@@ -17,14 +35,16 @@ const Contact = ({ locale }: { locale: string }) => {
           <h1 className="text-3xl font-bold text-center text-black mb-6">
             {t("title")}
           </h1>
-          <form name="contact" action={`/${locale}/`} className="space-y-4" method="POST" data-netlify="true">
+          <form name="contact" className="space-y-4" data-netlify="true" onSubmit={handleSubmit}>
+
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="text"
                 name="name"
                 placeholder={t("name")}
                 required
-                className="w-full p-3 rounded border  border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
+                className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
               />
               <input
                 type="email"
@@ -50,26 +70,26 @@ const Contact = ({ locale }: { locale: string }) => {
               />
             </div>
             <input
-              type="textbox"
+              type="text"
               name="reason"
               placeholder={t("reason")}
               required
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
-              type="textbox"
+              type="text"
               name="source"
               placeholder={t("source")}
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
-              type="textbox"
+              type="text"
               name="website"
               placeholder={t("website")}
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
-              type="textbox"
+              type="text"
               name="budget"
               placeholder={t("budget")}
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
