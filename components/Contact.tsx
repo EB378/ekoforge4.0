@@ -44,7 +44,6 @@ const Contact = ({ locale }: { locale: string }) => {
                 name="name"
                 placeholder={t("name")}
                 required
-                value="contact"
                 className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
               />
               <input
@@ -52,7 +51,6 @@ const Contact = ({ locale }: { locale: string }) => {
                 name="email"
                 placeholder={t("emailentry")}
                 required
-                value="contact"
                 className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
               />
             </div>
@@ -62,14 +60,12 @@ const Contact = ({ locale }: { locale: string }) => {
                 name="phone"
                 placeholder={t("phoneentry")}
                 required
-                value="contact"
                 className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
               />
               <input
                 type="text"
                 name="company"
                 placeholder={t("company")}
-                value="contact"
                 className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
               />
             </div>
@@ -78,28 +74,24 @@ const Contact = ({ locale }: { locale: string }) => {
               name="reason"
               placeholder={t("reason")}
               required
-              value="contact"
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
               type="text"
               name="source"
               placeholder={t("source")}
-              value="contact"
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
               type="text"
               name="website"
               placeholder={t("website")}
-              value="contact"
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <input
               type="text"
               name="budget"
               placeholder={t("budget")}
-              value="contact"
               className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
             />
             <button
