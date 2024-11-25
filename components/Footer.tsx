@@ -19,6 +19,8 @@ const Footer = ({ locale }: { locale: string }) => {
               <Image
                 src="/CopyForge-3-removebg-preview.png"
                 alt="Logo"
+                width={220}
+                height={80}
                 className="h-10 mx-auto md:mx-0"
               />
             </Link>
