@@ -19,6 +19,7 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale}>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <body>
         <NextIntlClientProvider messages={messages}>
           <div className="w-full sm:max-w-4xl mx-0 h-screen">

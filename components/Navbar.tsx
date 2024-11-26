@@ -64,7 +64,7 @@ const Navbar = ({ locale }: { locale: string }) => {
           <select
             value={locale}
             onChange={handleLanguageChange}
-            className="rounded-md px-4 py-2 bg-transparent border border-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            className="rounded-md px-4 py-2 bg-black border border-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
           >
             <option value="en">EN</option>
             <option value="fi">FI</option>
