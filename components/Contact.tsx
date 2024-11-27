@@ -6,21 +6,41 @@ import React, { FormEvent } from "react";
 const Contact = ({ locale }: { locale: string }) => {
   const t = useTranslations("Contact");
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    const form = event.currentTarget;
+    const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
-      await fetch("/", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(Array.from(formData.entries()) as [string, string][]).toString(),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "f1363286-3773-4366-a303-f62f033511e6", // Replace with your Web3Forms access key
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          company: formData.get("company"),
+          reason: formData.get("reason"),
+          source: formData.get("source"),
+          website: formData.get("website"),
+          budget: formData.get("budget"),
+        }),
       });
-      alert("Thank you for your submission");
+
+      const result = await response.json();
+      if (result.success) {
+        alert("Thank you for your submission!");
+      } else {
+        alert("Submission failed. Please try again.");
+      }
     } catch (error) {
-      alert("Submission failed. Please try again.");
+      alert("An error occurred. Please try again.");
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -35,10 +55,12 @@ const Contact = ({ locale }: { locale: string }) => {
           <h1 className="text-3xl font-bold text-center text-black mb-6">
             {t("title")}
           </h1>
-          <form name="contact" className="space-y-4" data-netlify="true" onSubmit={handleSubmit}>
-
-            <input type="hidden" name="form-name" value="contact" />
-
+          <form
+            name="contact"
+            className="space-y-4"
+            onSubmit={handleSubmit}
+            data-netlify="true"
+          >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="text"
@@ -57,7 +79,7 @@ const Contact = ({ locale }: { locale: string }) => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
-                type="phone"
+                type="tel"
                 name="phone"
                 placeholder={t("phoneentry")}
                 required
