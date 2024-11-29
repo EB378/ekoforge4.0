@@ -2,8 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
+import React from "react";
 
 const Footer = ({ locale }: { locale: string }) => {
   const t = useTranslations("Footer");
@@ -31,37 +31,37 @@ const Footer = ({ locale }: { locale: string }) => {
 
           {/* Links Section */}
           <div>
-            <h3 className="text-lg font-bold">{t("solutions")}</h3>
+            <h3 className="text-lg font-bold">{t("navigation")}</h3>
             <ul className="mt-4 space-y-2 text-sm text-gray-400">
               <li>
-                <a href="#" className="hover:underline">{t("marketing")}</a>
+                <a href="https://calendly.com/ekoforge" className="hover:underline">{t("book a call")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("analytics")}</a>
+                <a href={`/${locale}/#clients`} className="hover:underline">{t("fix my business")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("automation")}</a>
+                <a href={`/${locale}/#testimonials`} className="hover:underline">{t("case studies")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("commerce")}</a>
+                <a href={`/${locale}/#testimonials`} className="hover:underline">{t("testimonials")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("insights")}</a>
+                <a href={`/${locale}/#contactsec`} className="hover:underline">{t("contact")}</a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold">{t("support")}</h3>
+            <h3 className="text-lg font-bold">{t("socialmedia")}</h3>
             <ul className="mt-4 space-y-2 text-sm text-gray-400">
               <li>
-                <a href="#" className="hover:underline">{t("submitTicket")}</a>
+                <a href="https://www.instagram.com/eko_.forge/" className="hover:underline">{t("instagram")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("documentation")}</a>
+                <a href="https://www.facebook.com/profile.php?id=61559792997632" className="hover:underline">{t("facebook")}</a>
               </li>
               <li>
-                <a href="#" className="hover:underline">{t("guides")}</a>
+                <a href="https://www.linkedin.com/company/ekoforge" className="hover:underline">{t("linkedin")}</a>
               </li>
             </ul>
           </div>
@@ -71,15 +71,6 @@ const Footer = ({ locale }: { locale: string }) => {
             <ul className="mt-4 space-y-2 text-sm text-gray-400">
               <li>
                 <a href="#" className="hover:underline">{t("about")}</a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">{t("blog")}</a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">{t("jobs")}</a>
-              </li>
-              <li>
-                <a href="#" className="hover:underline">{t("press")}</a>
               </li>
             </ul>
           </div>

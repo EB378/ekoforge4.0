@@ -18,7 +18,7 @@ export default async function RootLayout({
   // side is the easiest way to get started
   const messages = await getMessages();
   return (
-    <html lang={locale}>
+    <html lang={locale} className="scroll-smooth">
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <body>
         <NextIntlClientProvider messages={messages}>
