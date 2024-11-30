@@ -27,7 +27,18 @@ export default function Home() {
               className="text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-center whitespace-nowrap"
               style={{ lineHeight: "1.2" }}
             >
-              <span className="bg-clip-text text-transparent bg-fixed bg-[url('/backgroundmain.png')] bg-cover bg-no-repeat">
+              <span
+                className="
+                  sm:bg-none 
+                  sm:text-white 
+                  md:bg-clip-text 
+                  md:text-transparent 
+                  md:bg-fixed 
+                  md:bg-[url('/backgroundmain.png')] 
+                  md:bg-cover 
+                  md:bg-no-repeat  
+                "
+                >
                 {t("More Growth More Sales")}
                 <br />
                 {t("More Turnover Guaranteed")}
