@@ -22,7 +22,7 @@ export default function Home() {
       <main className="w-full">
         {/* Hero Section */}
         <div className="relative flex flex-col items-center justify-center bg-black text-center">
-          <div className="relative min-h-[50vh] w-full overflow-hidden bg-black flex items-center justify-center">
+          <div className="relative md:min-h-[50vh] min-h-[20vh]  w-full overflow-hidden bg-black flex items-center justify-center">
             <h1
               className="text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-center whitespace-nowrap"
               style={{ lineHeight: "1.2" }}
@@ -61,7 +61,7 @@ export default function Home() {
               </button>
             </Link>
           </div>
-          <p className="mt-4 text-lg sm:text-xl text-yellow-400">{t("nextlevel")}</p>
+          <p className="mt-4 mx-4s text-lg sm:text-xl text-yellow-400">{t("nextlevel")}</p>
         </div>
 
         {/* Agitation Section */}
