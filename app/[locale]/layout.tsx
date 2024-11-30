@@ -19,22 +19,24 @@ export default async function RootLayout({
   const messages = await getMessages();
   return (
     <html lang={locale} className="scroll-smooth">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      {/* Google Tag Manager */}
-      <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-M9DBVJVZMR"
-        ></script>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {/* Google Tag Manager */}
         <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-M9DBVJVZMR');
-            `,
-          }}
-        />
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-M9DBVJVZMR"
+          ></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-M9DBVJVZMR');
+              `,
+            }}
+          />
+        </head>
       <body>
         <NextIntlClientProvider messages={messages}>
           <div className="w-full sm:max-w-4xl mx-0 h-screen">
