@@ -77,7 +77,7 @@ const Footer = ({ locale }: { locale: string }) => {
                 <LoginLink postLoginRedirectURL={`/${locale}/dashboard`}>Sign in</LoginLink>
               </li>
               <li>
-                <RegisterLink postLoginRedirectURL="/welcome">Sign up</RegisterLink>
+                <RegisterLink postLoginRedirectURL={`/${locale}/dashboard`}>Sign up</RegisterLink>
               </li>
             </ul>
           </div>

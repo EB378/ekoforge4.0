@@ -1,167 +1,149 @@
-import { useTranslations } from "next-intl";
-import { getMessages } from "next-intl/server";
-import Link from "next/link";
-import Image from "next/image";
-import Contact from "@/components/Contact";
+"use client";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const messages: any = await getMessages({ locale });
-  const title = messages.NavbarLinks.homeTitle;
+import { useState } from "react";
+import axios from "axios";
 
-  return {
-    title,
-  };
+// Define the expected shape of the API response
+interface Company {
+  name: string;
+  businessId: string;
+  website: string;
+  address: string;
+}
+
+interface ApiResponse {
+  results: Company[]; // Make sure this matches the actual API response
 }
 
 export default function Dashboard() {
-  const t = useTranslations("HomePage");
+  const [searchData, setSearchData] = useState("");
+  const [result, setResult] = useState<ApiResponse | null>(null); // Initialize as null
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post<ApiResponse>(
+        "https://comprehensive-business-insights-for-finnish-companies.p.rapidapi.com/rapidapi/company/search",
+        {
+          qbid: searchData,
+          qname: "",
+          qperson: "",
+          website: "",
+          page: 1,
+        },
+        {
+          headers: {
+		'x-rapidapi-key': '4b8b130080msh1bed0677170608ap141974jsn3eb9e746fa46',
+		'x-rapidapi-host': 'comprehensive-business-insights-for-finnish-companies.p.rapidapi.com',
+		'Content-Type': 'application/json'
+	},
+        }
+      );
+
+      console.log("API Response:", response.data); // Debug the response
+      setResult(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setLoading(false);
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen bg-black text-white">
-      <main className="w-full">
-        {/* Hero Section */}
-        <div className="relative flex flex-col items-center justify-center bg-black text-center">
-          <div className="relative md:min-h-[50vh] min-h-[20vh]  w-full overflow-hidden bg-black flex items-center justify-center">
-            <h1
-              className="text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-center whitespace-nowrap"
-              style={{ lineHeight: "1.2" }}
-            >
-              <span
-                className="
-                  sm:bg-none 
-                  sm:text-white 
-                  md:bg-clip-text 
-                  md:text-transparent 
-                  md:bg-fixed 
-                  md:bg-[url('/backgroundmain.png')] 
-                  md:bg-cover 
-                  md:bg-no-repeat  
-                "
-                >
-                {t("More Growth More Sales")}
-                <br />
-                {t("More Turnover Guaranteed")}
-              </span>
-            </h1>
-          </div>
+    <div className="min-h-screen w-screen bg-gray-100 flex flex-col">
+      {/* Navbar */}
+      <header className="bg-black text-white p-4 shadow-md">
+        <h1 className="text-lg font-bold">Dashboard</h1>
+      </header>
 
-
-
-          {/* CTA Section */}
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
-            <Link href="https://calendly.com/ekoforge">
-              <button className="px-6 py-3 bg-white text-black font-bold text-xl rounded-full border border-white hover:opacity-80">
-                {t("CTA")}
-              </button>
-            </Link>
-            <Link href="#contactsec">
-              <button className="px-6 py-3 bg-transparent text-white font-bold text-xl rounded-full border border-dotted border-white hover:opacity-80">
-                {t("contact")}
-              </button>
-            </Link>
-          </div>
-          <p className="mt-4 mx-4s text-lg sm:text-xl text-yellow-400">{t("nextlevel")}</p>
-        </div>
-
-        {/* Agitation Section */}
-        <div className="px-4 sm:px-6 lg:px-16 text-center mt-16">
-          <h3 className="text-xl sm:text-3xl font-medium">{t("agitate1")}</h3>
-          <h2 className="text-2xl sm:text-4xl font-bold mt-4">{t("agitate2")}</h2>
-          <h3 className="text-xl sm:text-3xl font-medium mt-4">{t("agitate3")}</h3>
-
-          <div className="flex flex-wrap gap-4 sm:gap-8 justify-center mt-8">
-            {[
-              { title: "agitatepoint1", details: ["agitatepoint11", "agitatepoint12"] },
-              { title: "agitatepoint2", details: ["agitatepoint21", "agitatepoint22"] },
-              { title: "agitatepoint3", details: ["agitatepoint31", "agitatepoint32"] },
-            ].map((point, index) => (
-              <div
-                key={index}
-                className="flex-1 min-w-[90%] sm:min-w-[30%] p-6 border-t-4 border-yellow-400 rounded-t-lg text-white"
-              >
-                <h3 className="text-xl sm:text-2xl font-semibold">{t(point.title)}</h3>
-                {point.details.map((detail, idx) => (
-                  <p key={idx} className="mt-2 text-sm sm:text-base">
-                    {t(detail)}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <hr className="w-full border-t border-white mt-16" id="clients" />
-
-        {/* CTA 2 Section */}
-        <div className="text-center px-4 sm:px-6 lg:px-16 mt-16">
-          <h3 className="text-xl sm:text-3xl font-medium">{t("CTA1")}</h3>
-          <h2 className="text-2xl sm:text-4xl font-bold mt-4">{t("CTA2")}</h2>
-          <h3 className="text-xl sm:text-3xl font-medium mt-4">{t("CTA3")}</h3>
-
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
-            <Link href="https://calendly.com/ekoforge">
-              <button className="px-6 py-3 bg-white text-black font-bold text-xl rounded-full border border-white hover:opacity-80">
-                {t("CTA4")}
-              </button>
-            </Link>
-            <Link href="#contactsec">
-              <button className="px-6 py-3 bg-transparent text-white font-bold text-xl rounded-full border border-dotted border-white hover:opacity-80">
-                {t("contact")}
-              </button>
-            </Link>
-          </div>
-          <p className="mt-4 text-lg sm:text-xl text-yellow-400">{t("CTA5")}</p>
-        </div>
-
-        {/* Testimonials Section */}
-        <div className="mt-16 w-screen px-4 sm:px-6 lg:px-16 flex justify-center text-center" id="testimonials">
-          <div className="flex flex-col sm:flex-row items-center gap-8 p-8 border-b border-white rounded-b-lg">
-            <Image
-              src="/ekotestimoonial1.png"
-              width={150}
-              height={150}
-              alt="Testimonial Client Logo Blurred"
-              className="rounded-full"
+      {/* Main Content */}
+      <main className="flex-grow p-8">
+        <div className="bg-white shadow-lg rounded-lg p-6 max-w-2xl mx-auto">
+          <h2 className="text-xl font-semibold mb-4 text-center">
+            Search Company Information
+          </h2>
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <input
+              type="text"
+              placeholder="Enter QBID"
+              value={searchData}
+              onChange={(e) => setSearchData(e.target.value)}
+              className="w-full sm:w-auto flex-grow p-3 border rounded-md text-black focus:ring-2 focus:ring-blue-500"
             />
-            <div className="flex-col">
-              <h2 className="text-lg sm:text-xl">{t("testimonials1")}</h2>
-              <p className="mt-4 text-yellow-400">— Kimmo, 2024</p>
-            </div>
+            <button
+              onClick={handleSearch}
+              disabled={loading}
+              className="px-6 py-3 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 disabled:opacity-50"
+            >
+              {loading ? "Loading..." : "Search"}
+            </button>
           </div>
         </div>
 
-        {/* Distinction Section */}
-        <div className="px-4 sm:px-6 lg:px-16 text-center mt-16">
-          <h2 className="text-xl sm:text-3xl font-medium">{t("distinction1")}</h2>
-          <h1 className="text-2xl sm:text-5xl font-bold mt-4">{t("distinction2")}</h1>
-
-          <div className="flex flex-wrap gap-4 sm:gap-8 justify-center mt-8">
-            {[
-              { title: "distinctionpoint1", details: ["distinctionpoint11", "distinctionpoint12"] },
-              { title: "distinctionpoint2", details: ["distinctionpoint21", "distinctionpoint22"] },
-              { title: "distinctionpoint3", details: ["distinctionpoint31", "distinctionpoint32"] },
-            ].map((point, index) => (
-              <div
-                key={index}
-                className="flex-1 min-w-[90%] sm:min-w-[30%] p-4 rounded-lg text-center bg-clip-padding bg-fixed text-black bg-[url('/backgroundmain.png')] bg-cover bg-no-repeat"
-              >
-                <div className="p-6 bg-white/60 rounded-lg">
-                  <h3 className="text-lg sm:text-2xl font-semibold">{t(point.title)}</h3>
-                  {point.details.map((detail, idx) => (
-                    <p key={idx} className="mt-2 text-sm sm:text-base">
-                      {t(detail)}
-                    </p>
+        {/* Results */}
+        <div className="mt-8">
+          {loading && (
+            <p className="text-center text-gray-500 font-medium">
+              Fetching data...
+            </p>
+          )}
+          {result && result.results && result.results.length > 0 && ( // Add a check for `result.results`
+            <div className="bg-white shadow-lg rounded-lg p-6 mt-6 max-w-4xl mx-auto">
+              <h3 className="text-lg font-semibold mb-4">Search Results</h3>
+              <table className="table-auto w-full border-collapse border border-gray-300">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border border-gray-300 px-4 py-2">Company Name</th>
+                    <th className="border border-gray-300 px-4 py-2">Business ID</th>
+                    <th className="border border-gray-300 px-4 py-2">Website</th>
+                    <th className="border border-gray-300 px-4 py-2">Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.results.map((company: Company, index: number) => (
+                    <tr
+                      key={index}
+                      className={`${
+                        index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                      }`}
+                    >
+                      <td className="border border-gray-300 px-4 py-2">
+                        {company.name || "N/A"}
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {company.businessId || "N/A"}
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        <a
+                          href={company.website || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-500 hover:underline"
+                        >
+                          {company.website || "N/A"}
+                        </a>
+                      </td>
+                      <td className="border border-gray-300 px-4 py-2">
+                        {company.address || "N/A"}
+                      </td>
+                    </tr>
                   ))}
-                </div>
-              </div>
-            ))}
-          </div>
+                </tbody>
+              </table>
+            </div>
+          )}
+          {result && (!result.results || result.results.length === 0) && ( // Handle no results
+            <p className="text-center text-gray-500 mt-4">
+              No results found.
+            </p>
+          )}
         </div>
-
-        {/* Contact Section */}
-        <Contact locale={""} />
       </main>
+
+      {/* Footer */}
+      <footer className="bg-black text-white p-4 text-center shadow-inner">
+        <p>&copy; 2024 Dashboard System</p>
+      </footer>
     </div>
   );
 }
