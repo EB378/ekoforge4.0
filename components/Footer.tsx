@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
@@ -71,6 +72,12 @@ const Footer = ({ locale }: { locale: string }) => {
             <ul className="mt-4 space-y-2 text-sm text-gray-400">
               <li>
                 <a href="#" className="hover:underline">{t("about")}</a>
+              </li>
+              <li>
+                <LoginLink postLoginRedirectURL={`/${locale}/dashboard`}>Sign in</LoginLink>
+              </li>
+              <li>
+                <RegisterLink postLoginRedirectURL="/welcome">Sign up</RegisterLink>
               </li>
             </ul>
           </div>

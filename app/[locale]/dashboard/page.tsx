@@ -3,8 +3,6 @@ import { getMessages } from "next-intl/server";
 import Link from "next/link";
 import Image from "next/image";
 import Contact from "@/components/Contact";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -16,12 +14,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function Home() {
+export default function Dashboard() {
   const t = useTranslations("HomePage");
 
   return (
-    <>
-    <Navbar locale={""} />
     <div className="flex flex-col items-center justify-center w-screen bg-black text-white">
       <main className="w-full">
         {/* Hero Section */}
@@ -167,7 +163,5 @@ export default function Home() {
         <Contact locale={""} />
       </main>
     </div>
-    <Footer locale={""} />
-    </>
   );
 }
