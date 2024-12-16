@@ -6,6 +6,7 @@ import Contact from "@/components/Contact";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const messages: any = await getMessages({ locale });
@@ -22,11 +23,11 @@ export default function Home() {
   return (
     <>
     <Navbar locale={""} />
-    <div className="flex flex-col items-center justify-center w-screen bg-black text-white">
-      <main className="w-full">
+    <div className="flex flex-col items-center justify-center w-screen bg-gradient-to-tr from-purple-500 to-pink-500 text-white">
+      <main className="w-full bg-black/85">
         {/* Hero Section */}
-        <div className="relative flex flex-col items-center justify-center bg-black text-center">
-          <div className="relative md:min-h-[50vh] min-h-[20vh]  w-full overflow-hidden bg-black flex items-center justify-center">
+        <div className="relative flex flex-col items-center justify-center text-center">
+          <div className="relative md:min-h-[50vh] min-h-[35vh] w-full overflow-hidden flex items-center justify-center">
             <h1
               className="text-[7vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight text-center whitespace-nowrap"
               style={{ lineHeight: "1.2" }}
@@ -118,7 +119,7 @@ export default function Home() {
           <p className="mt-4 text-lg sm:text-xl text-yellow-400">{t("CTA5")}</p>
         </div>
 
-        {/* Testimonials Section */}
+        {/* Testimonials Section as Slideshow */}
         <div className="mt-16 w-screen px-4 sm:px-6 lg:px-16 flex justify-center text-center" id="testimonials">
           <div className="flex flex-col sm:flex-row items-center gap-8 p-8 border-b border-white rounded-b-lg">
             <Image
@@ -134,6 +135,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+
 
         {/* Distinction Section */}
         <div className="px-4 sm:px-6 lg:px-16 text-center mt-16">
