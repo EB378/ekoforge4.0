@@ -2,25 +2,22 @@
 
 import { useTranslations } from "next-intl";
 import React, { FormEvent } from "react";
+import { FaPhoneAlt, FaEnvelope, FaBuilding } from "react-icons/fa";
 
 const Contact = ({ locale }: { locale: string }) => {
   const t = useTranslations("Contact");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: "f1363286-3773-4366-a303-f62f033511e6", // Replace with your Web3Forms access key
+          access_key: "f1363286-3773-4366-a303-f62f033511e6",
           name: formData.get("name"),
           email: formData.get("email"),
           phone: formData.get("phone"),
@@ -33,11 +30,8 @@ const Contact = ({ locale }: { locale: string }) => {
       });
 
       const result = await response.json();
-      if (result.success) {
-        alert("Thank you for your submission!");
-      } else {
-        alert("Submission failed. Please try again.");
-      }
+      if (result.success) alert("Thank you for your submission!");
+      else alert("Submission failed. Please try again.");
     } catch (error) {
       alert("An error occurred. Please try again.");
       console.error("Error submitting form:", error);
@@ -47,118 +41,94 @@ const Contact = ({ locale }: { locale: string }) => {
   return (
     <div
       id="contactsec"
-      className="bg-[url('/backgroundmain-2.png')] bg-cover mt-5 bg-fixed bg-center py-16 px-8 w-full overflow-hidden flex text-white"
+      className="relative py-16 px-6 bg-fixed bg-[url('/backgroundmain-2.png')] bg-cover bg-center text-white overflow-hidden"
     >
-      <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-black/60 z-0"></div>
+
+      <div className="relative container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 z-10">
         {/* Contact Form */}
-        <div className="bg-white bg-opacity-90 rounded-lg shadow-lg p-8">
-          <h1 className="text-3xl font-bold text-center text-black mb-6">
+        <div className="bg-white bg-opacity-90 rounded-lg shadow-2xl p-8">
+          <h1 className="text-3xl font-extrabold text-gray-900 text-center mb-6">
             {t("title")}
           </h1>
           <form
             name="contact"
-            className="space-y-4"
             onSubmit={handleSubmit}
-            data-netlify="true"
+            className="space-y-6"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="relative group">
               <input
                 type="text"
                 name="name"
-                placeholder={t("name")}
                 required
-                className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
+                placeholder=" "
+                className="peer w-full p-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-yellow-500 outline-none transition"
               />
+              <label className="absolute left-3 top-3 text-gray-400 text-sm peer-placeholder-shown:top-6 peer-placeholder-shown:text-base transition-all peer-focus:top-3 peer-focus:text-sm">
+                {t("name")}
+              </label>
+            </div>
+            <div className="relative group">
               <input
                 type="email"
                 name="email"
-                placeholder={t("emailentry")}
                 required
-                className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
+                placeholder=" "
+                className="peer w-full p-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-yellow-500 outline-none transition"
               />
+              <label className="absolute left-3 top-3 text-gray-400 text-sm peer-placeholder-shown:top-6 peer-placeholder-shown:text-base transition-all peer-focus:top-3 peer-focus:text-sm">
+                {t("emailentry")}
+              </label>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <input
-                type="tel"
-                name="phone"
-                placeholder={t("phoneentry")}
+            <div className="relative group">
+              <textarea
+                name="reason"
                 required
-                className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-              />
-              <input
-                type="text"
-                name="company"
-                placeholder={t("company")}
-                className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-              />
+                rows={4}
+                placeholder=" "
+                className="peer w-full p-3 rounded-lg border border-gray-300 text-gray-700 focus:ring-2 focus:ring-yellow-500 outline-none transition"
+              ></textarea>
+              <label className="absolute left-3 top-3 text-gray-400 text-sm peer-placeholder-shown:top-6 peer-placeholder-shown:text-base transition-all peer-focus:top-3 peer-focus:text-sm">
+                {t("reason")}
+              </label>
             </div>
-            <input
-              type="text"
-              name="reason"
-              placeholder={t("reason")}
-              required
-              className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-            />
-            <input
-              type="text"
-              name="source"
-              placeholder={t("source")}
-              className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-            />
-            <input
-              type="text"
-              name="website"
-              placeholder={t("website")}
-              className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-            />
-            <input
-              type="text"
-              name="budget"
-              placeholder={t("budget")}
-              className="w-full p-3 rounded border border-gray-300 text-black focus:outline-none focus:ring focus:ring-yellow-500"
-            />
             <button
               type="submit"
-              className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded transition duration-200"
+              className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white font-bold py-3 rounded-lg shadow-lg hover:scale-105 transition-transform"
             >
               {t("send")}
             </button>
           </form>
         </div>
 
-        {/* Quote and Contact Information */}
-        <div className="flex flex-col justify-center items-center space-y-8 text-center lg:text-left">
-          {/* Quote Section */}
-          <div className="bg-black bg-opacity-70 text-white p-6 rounded-lg border border-gray-500 shadow-md">
-            <h3 className="text-xl font-medium">
-              {t("q1")}
-              <br />
-              {t("q2")}
-            </h3>
+        {/* Contact Info and Quote */}
+        <div className="flex flex-col justify-center items-center lg:items-start space-y-8 text-center lg:text-left">
+          {/* Quote */}
+          <div className="p-6 bg-black/70 rounded-lg border border-gray-700 shadow-lg">
+            <h3 className="text-xl font-semibold italic">{t("q1")}</h3>
+            <h3 className="text-xl font-semibold italic">{t("q2")}</h3>
           </div>
 
-          {/* Contact Info */}
-          <div>
+          {/* Contact Information */}
+          <div className="space-y-4">
             <h2 className="text-2xl font-bold">{t("contact information")}</h2>
-            <p className="mt-4">
-              <strong>EkoForge Oy</strong>
-              <br />
-              {t("phone")}:{" "}
-              <a
-                href="tel:+358442413840"
-                className="text-yellow-500 hover:underline"
-              >
+            <div className="flex items-center gap-4">
+              <FaPhoneAlt className="text-yellow-400 text-2xl" />
+              <a href="tel:+358442413840" className="hover:underline">
                 +358 44 2413 840
               </a>
-              <br />
-              {t("email")}:{" "}
-              <a
-                href="mailto:ekoforge@gmail.com"
-                className="text-yellow-500 hover:underline"
-              >
+            </div>
+            <div className="flex items-center gap-4">
+              <FaEnvelope className="text-yellow-400 text-2xl" />
+              <a href="mailto:ekoforge@gmail.com" className="hover:underline">
                 ekoforge@gmail.com
               </a>
-            </p>
+            </div>
+            <div className="flex items-center gap-4">
+              <FaBuilding className="text-yellow-400 text-2xl" />
+              <p>EkoForge Oy</p>
+            </div>
           </div>
         </div>
       </div>
