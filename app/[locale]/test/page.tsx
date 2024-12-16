@@ -5,6 +5,7 @@ import Image from "next/image";
 import Contact from "@/components/Contact";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -26,7 +27,7 @@ export default function Home() {
         <main className="w-full bg-black/80 relative">
           {/* Hero Section */}
           <div className="relative text-center overflow-hidden">
-            <div className="relative flex items-center justify-center h-[75vh]">
+            <div className="relative flex items-center justify-center h-[45vh]">
               <Image
                 src="/backgroundmain.png"
                 alt="Hero Background"
@@ -36,9 +37,7 @@ export default function Home() {
               <h1
                 className="relative z-10 text-[8vw] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight font-bold"
                 style={{
-                  background: "linear-gradient(to right, #ff7eb3, #fdffb6)",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
+                  color: "white",
                 }}
               >
                 {t("Unleash Your Business Potential")}
@@ -55,7 +54,7 @@ export default function Home() {
                 </Link>
                 <Link href="#contactsec">
                   <button className="px-8 py-4 bg-transparent border border-white text-white font-bold text-xl rounded-full shadow-lg hover:scale-105 transition-transform">
-                    {t("Contact Us")}
+                    {t("contact")}
                   </button>
                 </Link>
               </div>
@@ -64,30 +63,44 @@ export default function Home() {
 
           {/* Problem-Solution Section */}
           <div className="relative px-6 sm:px-12 lg:px-24 mt-16 text-center">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
+            {/* Section Heading */}
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-12">
               <span className="relative z-10">
-                {t("What's Holding")}{" "}
-                <span className="text-blue-400 bg-blue-900 px-2 py-1 rounded-lg inline-block">
+                {t("What's Holding")}
+                <span className="text-blue-800 bg-blue-300 px-3 py-2 rounded-lg inline-block ml-2 shadow-md">
                   {t("You Back?")}
                 </span>
               </span>
             </h2>
-            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
-              {/* Challenge Cards */}
-              <div className="relative w-full max-w-[300px] p-6 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-2xl shadow-lg hover:scale-105 transition-transform">
-                <h3 className="text-white text-xl font-bold">{t("Challenge1")}</h3>
-                <p className="mt-2 text-white text-sm">{t("ChallengeDetail1")}</p>
+
+            {/* Cards Container */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center">
+              {/* Card 1 */}
+              <div className="relative w-full max-w-[350px] p-6 bg-gradient-to-b from-yellow-600 to-orange-700 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="text-white text-2xl font-bold mb-4">{t("No Experience?")}</h3>
+                <p className="text-gray-200 text-base leading-relaxed">
+                  {t("You don’t know where to start or lack the expertise to move forward.")}
+                </p>
               </div>
-              <div className="relative w-full max-w-[300px] p-6 bg-gradient-to-r from-teal-400 to-blue-500 rounded-2xl shadow-lg hover:scale-105 transition-transform">
-                <h3 className="text-white text-xl font-bold">{t("Challenge2")}</h3>
-                <p className="mt-2 text-white text-sm">{t("ChallengeDetail2")}</p>
+
+              {/* Card 2 */}
+              <div className="relative w-full max-w-[350px] p-6 bg-gradient-to-b from-teal-600 to-blue-700 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="text-white text-2xl font-bold mb-4">{t("No Time?")}</h3>
+                <p className="text-gray-200 text-base leading-relaxed">
+                  {t("You’re too busy managing your business to focus on growth strategies.")}
+                </p>
               </div>
-              <div className="relative w-full max-w-[300px] p-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl shadow-lg hover:scale-105 transition-transform">
-                <h3 className="text-white text-xl font-bold">{t("Challenge3")}</h3>
-                <p className="mt-2 text-white text-sm">{t("ChallengeDetail3")}</p>
+
+              {/* Card 3 */}
+              <div className="relative w-full max-w-[350px] p-6 bg-gradient-to-b from-purple-600 to-pink-700 rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+                <h3 className="text-white text-2xl font-bold mb-4">{t("No Resources?")}</h3>
+                <p className="text-gray-200 text-base leading-relaxed">
+                  {t("You don’t have the right tools or resources to scale effectively.")}
+                </p>
               </div>
             </div>
           </div>
+
 
           {/* Call-to-Action Section */}
           <div className="mt-16 text-center px-6 sm:px-12 lg:px-24">
@@ -102,8 +115,10 @@ export default function Home() {
             </div>
           </div>
 
+          <Testimonials/>
+
           {/* Contact Section */}
-          <Contact locale={""} />
+          <Contact/>
 
           {/* Footer */}
           <Footer locale={""} />
