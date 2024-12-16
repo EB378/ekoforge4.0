@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs";
 
 // Define the expected shape of the API response
 interface Company {
@@ -54,6 +55,7 @@ export default function Dashboard() {
       {/* Navbar */}
       <header className="bg-black text-white p-4 shadow-md">
         <h1 className="text-lg font-bold">Dashboard</h1>
+        <LogoutLink>Logout</LogoutLink>
       </header>
 
       {/* Main Content */}
